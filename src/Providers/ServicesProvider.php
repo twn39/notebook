@@ -8,8 +8,6 @@
 
 namespace App\Providers;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DriverManager;
 use Illuminate\Database\Capsule\Manager;
 use League\CLImate\CLImate;
 use Pimple\Container;

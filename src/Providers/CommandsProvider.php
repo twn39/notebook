@@ -8,7 +8,7 @@
 namespace App\Providers;
 
 use App\Commands\Show;
-use Doctrine\DBAL\Connection;
+use App\Commands\Task;
 use Illuminate\Database\Capsule\Manager;
 use League\CLImate\CLImate;
 use Pimple\Container;
@@ -29,6 +29,9 @@ class CommandsProvider implements ServiceProviderInterface
     {
         $pimple[Show::class] = function () use ($pimple) {
           return new Show($pimple[CLImate::class], $pimple[Manager::class], $pimple['config']);
+        };
+        $pimple[Task::class] = function () use ($pimple) {
+            return new Task($pimple[CLImate::class], $pimple[Manager::class]);
         };
     }
 }

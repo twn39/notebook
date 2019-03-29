@@ -7,7 +7,9 @@
  */
 
 use App\Commands\Show;
+use App\Commands\Task;
 
 return [
     'show' => Show::class,
+    'task' => Task::class,
 ];
