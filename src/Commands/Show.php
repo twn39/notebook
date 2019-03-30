@@ -8,6 +8,7 @@
 namespace App\Commands;
 
 use App\Models\Task;
+use Carbon\Carbon;
 use League\CLImate\CLImate;
 use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\Console\Command\Command;
@@ -63,15 +64,19 @@ class Show extends Command
                 ->get();
 
             foreach ($tasks as $task) {
+                $date = '';
+                if ((time() - strtotime($task->created_at)) > 1800) {
+                    $date = Carbon::createFromTimeString($task->created_at)->diffForHumans();
+                }
                 if ((int)$task->status === Task::PENDING) {
-                    $this->CLImate->output("      <dark_gray>{$task->id}. </dark_gray><magenta>[ ]</magenta> {$task->title} <dark_gray>3d</dark_gray>");
+                    $this->CLImate->output("      <dark_gray>{$task->id}. </dark_gray><magenta>[ ]</magenta> {$task->title} <dark_gray>  {$date}</dark_gray>");
                 }
 
                 if ((int)$task->status === Task::DONE) {
-                    $this->CLImate->output("      <dark_gray>{$task->id}. </dark_gray><green> ✔ </green> <dark_gray>{$task->title}</dark_gray>");
+                    $this->CLImate->output("      <dark_gray>{$task->id}. </dark_gray><green> ✔ </green> <dark_gray>{$task->title}    {$date}</dark_gray>");
                 }
                 if ((int)$task->status === Task::IN_PROGRESS) {
-                    $this->CLImate->output("      <dark_gray>{$task->id}. </dark_gray><blue> ✦ </blue> <blue>{$task->title}</blue>");
+                    $this->CLImate->output("      <dark_gray>{$task->id}. </dark_gray><blue> ✦ </blue> <blue>{$task->title}</blue><dark_gray>   {$date}</dark_gray>");
                 }
 
             }
