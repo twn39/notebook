@@ -42,18 +42,6 @@ class Show extends Command
     {
         $this->listBoard();
         $this->listStats();
-
-        /*
-        $this->CLImate->br()->output("    <underline>My Board</underline> <dark_gray>[1/3]</dark_gray>");
-        $this->CLImate->output("      <dark_gray>104. </dark_gray><magenta>[ ]</magenta> hello <dark_gray>3d</dark_gray>");
-        $this->CLImate->output("      <dark_gray>2. </dark_gray><green> ✔ </green> <dark_gray>完成</dark_gray>");
-        $this->CLImate->output("      <dark_gray>3. </dark_gray>[ ] hello");
-        $this->CLImate->output("      <dark_gray>4. </dark_gray>[ ] hello");
-        $this->CLImate->output("      <dark_gray>5. </dark_gray>[ ] hello");
-
-        $this->CLImate->br()->output("    <yellow>30%</yellow> <dark_gray>of all tasks complete.</dark_gray>");
-        $this->CLImate->output("    <green>2</green> <dark_gray>done · </dark_gray><blue>0</blue> <dark_gray>in-progress · </dark_gray><magenta>1</magenta> <dark_gray>pending · </dark_gray><cyan>2</cyan> <dark_gray>notes</dark_gray>");
-        */
     }
 
 
@@ -93,7 +81,31 @@ class Show extends Command
 
     public function listStats()
     {
-        $this->CLImate->br()->output("    <yellow>30%</yellow> <dark_gray>of all tasks complete.</dark_gray>");
-        $this->CLImate->output("    <green>2</green> <dark_gray>done · </dark_gray><blue>0</blue> <dark_gray>in-progress · </dark_gray><magenta>1</magenta> <dark_gray>pending · </dark_gray><cyan>2</cyan> <dark_gray>notes</dark_gray>");
+        $tasks = $this->DB->table('tasks')
+            ->whereIn('status', [0, 1, 2])
+            ->get()->toArray();
+
+        $done = [];
+        $inProgress = [];
+        $pending = [];
+
+        foreach ($tasks as $task) {
+            if ($task->status == Task::DONE) {
+                $done[] = $task;
+            } else if ($task->status == Task::IN_PROGRESS) {
+                $inProgress[] = $task;
+            } else {
+                $pending[] = $task;
+            }
+        }
+
+        $doneNo = count($done);
+        $inProgressNo = count($inProgress);
+        $pendingNo = count($pending);
+        $percent = ceil($doneNo / count($tasks) * 100);
+
+
+        $this->CLImate->br()->output("    <yellow>{$percent}%</yellow> <dark_gray>of all tasks complete.</dark_gray>");
+        $this->CLImate->output("    <green>{$doneNo}</green> <dark_gray>done · </dark_gray><blue>{$inProgressNo}</blue> <dark_gray>in-progress · </dark_gray><magenta>{$pendingNo}</magenta> <dark_gray>pending · </dark_gray><cyan>2</cyan> <dark_gray>notes</dark_gray>");
     }
 }
