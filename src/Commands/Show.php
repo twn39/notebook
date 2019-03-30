@@ -48,13 +48,15 @@ class Show extends Command
 
     public function listBoard()
     {
+        $today = date('Y-m-d');
+        $this->CLImate->br()->output("    <cyan>Today: $today  🎊 </cyan>");
 
         $boards = $this->DB->table('boards')
             ->select('*')
             ->get();
 
         foreach ($boards as $board) {
-            $this->CLImate->br()->output("    <underline>{$board->name}</underline> <dark_gray>[1/3]</dark_gray>");
+            $this->CLImate->br()->output("    <underline>{$board->name}</underline>");
             $tasks = $this->DB->table('tasks')
                 ->select('*')
                 ->where('board_id', $board->id)
