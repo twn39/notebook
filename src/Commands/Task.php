@@ -45,6 +45,7 @@ class Task extends Command
                     new InputOption('board', 'b', InputOption::VALUE_OPTIONAL, 'special a board', 'My Board'),
                     new InputOption('check', 'c', InputOption::VALUE_OPTIONAL, 'check a task'),
                     new InputOption('start', 's', InputOption::VALUE_OPTIONAL, 'start a task'),
+                    new InputOption('archive', 'a', InputOption::VALUE_OPTIONAL, 'archive a task'),
                 ])
             );
     }
@@ -56,6 +57,7 @@ class Task extends Command
         $boardName = $input->getOption('board');
         $checkId = $input->getOption('check');
         $startId = $input->getOption('start');
+        $archiveId = $input->getOption('archive');
 
         $board = $this->DB->table('boards')
             ->where('name', $boardName)
@@ -74,6 +76,10 @@ class Task extends Command
         }
         if (is_numeric($startId)) {
             $this->start($startId);
+            return ;
+        }
+        if (is_numeric($archiveId)) {
+            $this->archive($archiveId);
             return ;
         }
         if (!empty($name) && empty($checkId) && empty($startId)) {
@@ -104,6 +110,16 @@ class Task extends Command
             ]);
 
         $this->CLImate->br()->output("<green>    ✔ Task has start.</green>");
+    }
+
+    private function archive($taskId)
+    {
+        $this->DB->table('tasks')
+            ->where('id', $taskId)
+            ->update([
+                'status' => \App\Models\Task::ARCHIVE,
+            ]);
+        $this->CLImate->br()->output("<green>    ✔ Task has archived.</green>");
     }
 
     private function check($taskId)
