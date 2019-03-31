@@ -31,12 +31,16 @@ class ServicesProvider implements ServiceProviderInterface
             return new CLImate();
         };
 
-        $pimple['config'] = function () {
+        $pimple['config'] = function () use ($pimple) {
 
             $userProfileDir = $_SERVER['USERPROFILE'];
             $configDir = $userProfileDir.'/.nb';
 
             $config = @json_decode(file_get_contents($configDir.'/config.json'), true);
+            if (empty($config)) {
+                $pimple[CLImate::class]->br()->output("    <red>❌  Please run \"init\" command first.</red>");
+                exit(0);
+            }
             return $config;
         };
 

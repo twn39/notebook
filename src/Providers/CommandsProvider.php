@@ -36,7 +36,7 @@ class CommandsProvider implements ServiceProviderInterface
         };
 
         $pimple[Init::class] = function () use ($pimple) {
-            return new Init($pimple[CLImate::class], $pimple[Manager::class]);
+            return new Init($pimple[CLImate::class]);
         };
     }
 }

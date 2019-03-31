@@ -15,10 +15,6 @@ class Init extends Command
      * @var CLImate
      */
     private $CLImate;
-    /**
-     * @var Manager
-     */
-    private $DB;
 
     private $configDir;
 
@@ -26,11 +22,10 @@ class Init extends Command
 
     protected static $defaultName = 'init';
 
-    public function __construct(CLImate $CLImate, Manager $DB)
+    public function __construct(CLImate $CLImate)
     {
         parent::__construct();
         $this->CLImate = $CLImate;
-        $this->DB = $DB;
     }
 
 
