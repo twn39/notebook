@@ -32,30 +32,18 @@ class ServicesProvider implements ServiceProviderInterface
         };
 
         $pimple['config'] = function () {
-            $defaultConfig = [
-                'DB' => [
-                    'driver' => 'sqlite',
-                    'database' => '~/nb/db.sqlite',
-                ],
-            ];
-            $config = @file_get_contents('~/nb/config.json');
-            if ($config) {
-                $config = @json_decode($config, true);
-            }
-            if (empty($config)) {
-                $config = [];
-            }
-            return array_replace($defaultConfig, $config);
+
+            $userProfileDir = $_SERVER['USERPROFILE'];
+            $configDir = $userProfileDir.'/.nb';
+
+            $config = @json_decode(file_get_contents($configDir.'/config.json'), true);
+            return $config;
         };
 
-        $pimple[Manager::class] = function () {
+        $pimple[Manager::class] = function () use ($pimple) {
             $capsule = new Capsule;
 
-            $capsule->addConnection([
-                'driver'    => 'sqlite',
-                'database'  => __DIR__.'/../../data/db.sqlite',
-                'prefix'    => '',
-            ]);
+            $capsule->addConnection($pimple['config']['DB']);
 
             $capsule->setAsGlobal();
             $capsule->bootEloquent();

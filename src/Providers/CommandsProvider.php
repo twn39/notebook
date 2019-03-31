@@ -7,12 +7,13 @@
  */
 namespace App\Providers;
 
+use App\Commands\Init;
 use App\Commands\Show;
 use App\Commands\Task;
-use Illuminate\Database\Capsule\Manager;
-use League\CLImate\CLImate;
 use Pimple\Container;
+use League\CLImate\CLImate;
 use Pimple\ServiceProviderInterface;
+use Illuminate\Database\Capsule\Manager;
 
 class CommandsProvider implements ServiceProviderInterface
 {
@@ -32,6 +33,10 @@ class CommandsProvider implements ServiceProviderInterface
         };
         $pimple[Task::class] = function () use ($pimple) {
             return new Task($pimple[CLImate::class], $pimple[Manager::class]);
+        };
+
+        $pimple[Init::class] = function () use ($pimple) {
+            return new Init($pimple[CLImate::class], $pimple[Manager::class]);
         };
     }
 }
