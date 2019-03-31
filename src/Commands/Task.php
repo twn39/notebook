@@ -42,7 +42,7 @@ class Task extends Command
             ->setDefinition(
                 new InputDefinition([
                     new InputOption('title', 't', InputOption::VALUE_OPTIONAL, 'create a task'),
-                    new InputOption('board', 'b', InputOption::VALUE_OPTIONAL, 'special a board', 'My Board'),
+                    new InputOption('board', 'b', InputOption::VALUE_OPTIONAL, 'special a board', 'Board'),
                     new InputOption('check', 'c', InputOption::VALUE_OPTIONAL, 'check a task'),
                     new InputOption('start', 's', InputOption::VALUE_OPTIONAL, 'start a task'),
                     new InputOption('archive', 'a', InputOption::VALUE_OPTIONAL, 'archive a task'),

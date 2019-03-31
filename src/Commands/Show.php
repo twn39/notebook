@@ -48,8 +48,8 @@ class Show extends Command
 
     public function listBoard()
     {
-        $today = date('Y-m-d');
-        $this->CLImate->br()->output("    <cyan>Today: $today  🎊 </cyan>");
+        $today = Carbon::now('Asia/Shanghai');
+        $this->CLImate->br()->output("    <cyan>Today: {$today->toDayDateTimeString()}  🎊 </cyan>");
 
         $boards = $this->DB->table('boards')
             ->select('*')
