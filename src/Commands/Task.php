@@ -99,7 +99,8 @@ class Task extends Command
             return ;
         }
 
-        $this->CLImate->br()->output("<green>    ! Invalid options.</green>");
+        $this->CLImate->br()->output("<yellow>    🤷‍️  Invalid options.</yellow>");
+        $this->CLImate->output('');
     }
 
     private function start($taskId)
