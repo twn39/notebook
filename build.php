@@ -11,6 +11,7 @@ foreach ($exts as $ext) {
 }
 // 把build.php本身摘除
 $phar->delete('build.php');
+$phar->addFile('vendor/symfony/translation/Resources/data/parents.json');
 // 设置入口
 $defaultStub = $phar->createDefaultStub('bin/nb.php');
 $defaultStub = <<<STUB
