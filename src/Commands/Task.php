@@ -95,6 +95,7 @@ class Task extends Command
                 ]);
 
             $this->CLImate->br()->output("<green>    ✔ Task has created.</green>");
+            $this->CLImate->output('');
             return ;
         }
 
@@ -110,6 +111,7 @@ class Task extends Command
             ]);
 
         $this->CLImate->br()->output("<green>    ✔ Task has start.</green>");
+        $this->CLImate->output('');
     }
 
     private function archive($taskId)
@@ -120,6 +122,7 @@ class Task extends Command
                 'status' => \App\Models\Task::ARCHIVE,
             ]);
         $this->CLImate->br()->output("<green>    ✔ Task has archived.</green>");
+        $this->CLImate->output('');
     }
 
     private function check($taskId)
@@ -144,6 +147,7 @@ class Task extends Command
         }
 
         $this->CLImate->br()->output("<green>    ✔ Task has checked.</green>");
+        $this->CLImate->output('');
     }
 
 
