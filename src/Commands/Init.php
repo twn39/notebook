@@ -38,7 +38,7 @@ class Init extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $userProfileDir = $_SERVER['USERPROFILE'];
+        $userProfileDir = $_SERVER['USERPROFILE'] ?? $_SERVER['HOME'];
         $this->configDir = $userProfileDir . '/.nb';
         $this->configFile = $this->configDir . '/config.json';
 
@@ -122,6 +122,6 @@ SQL;
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
-        $this->CLImate->br()->output('    <green> 🎉 DB init success</green>');
+        $this->CLImate->br()->output('    <green> 🎉  DB init success</green>');
     }
 }

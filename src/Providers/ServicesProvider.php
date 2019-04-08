@@ -33,7 +33,7 @@ class ServicesProvider implements ServiceProviderInterface
 
         $pimple['config'] = function () use ($pimple) {
 
-            $userProfileDir = $_SERVER['USERPROFILE'];
+            $userProfileDir = $_SERVER['USERPROFILE'] ?? $_SERVER['HOME'];
             $configDir = $userProfileDir.'/.nb';
 
             $config = @json_decode(file_get_contents($configDir.'/config.json'), true);
