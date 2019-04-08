@@ -116,5 +116,6 @@ class Show extends Command
 
         $this->CLImate->br()->output("    <yellow>{$percent}%</yellow> <dark_gray>of all tasks complete.</dark_gray>");
         $this->CLImate->output("    <green>{$doneNo}</green> <dark_gray>done · </dark_gray><blue>{$inProgressNo}</blue> <dark_gray>in-progress · </dark_gray><magenta>{$pendingNo}</magenta> <dark_gray>pending · </dark_gray><cyan>2</cyan> <dark_gray>notes</dark_gray>");
+        $this->CLImate->output('');
     }
 }

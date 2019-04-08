@@ -122,6 +122,7 @@ SQL;
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
-        $this->CLImate->br()->output('    <green> 🎉  DB init success</green>');
+        $this->CLImate->br()->output('   <green> 🎉  DB init success</green>');
+        $this->CLImate->output('');
     }
 }

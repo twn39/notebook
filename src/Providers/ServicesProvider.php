@@ -38,7 +38,8 @@ class ServicesProvider implements ServiceProviderInterface
 
             $config = @json_decode(file_get_contents($configDir.'/config.json'), true);
             if (empty($config)) {
-                $pimple[CLImate::class]->br()->output("    <red>❌  Please run \"init\" command first.</red>");
+                $pimple[CLImate::class]->br()->output("    <red>⚠️  Please run \"init\" command first.</red>");
+                $pimple[CLImate::class]->output('');
                 exit(0);
             }
             return $config;
