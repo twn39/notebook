@@ -7,6 +7,7 @@
  */
 
 use App\Commands\Init;
+use App\Commands\Note;
 use App\Commands\Show;
 use App\Commands\Task;
 
@@ -14,4 +15,5 @@ return [
     'show' => Show::class,
     'task' => Task::class,
     'init' => Init::class,
+    'note' => Note::class,
 ];

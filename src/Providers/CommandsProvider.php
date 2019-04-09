@@ -8,6 +8,7 @@
 namespace App\Providers;
 
 use App\Commands\Init;
+use App\Commands\Note;
 use App\Commands\Show;
 use App\Commands\Task;
 use Pimple\Container;
@@ -37,6 +38,10 @@ class CommandsProvider implements ServiceProviderInterface
 
         $pimple[Init::class] = function () use ($pimple) {
             return new Init($pimple[CLImate::class]);
+        };
+
+        $pimple[Note::class] = function () use ($pimple) {
+            return new Note($pimple[CLImate::class]);
         };
     }
 }
