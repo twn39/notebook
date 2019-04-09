@@ -9,7 +9,9 @@ namespace App\Commands;
 
 use League\CLImate\CLImate;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Note extends Command
@@ -29,6 +31,15 @@ class Note extends Command
     public function configure()
     {
         $this->setDescription("Note command")
+             ->setDefinition(
+                 new InputDefinition([
+                     new InputOption('title', 't', InputOption::VALUE_OPTIONAL, 'create a task'),
+                     new InputOption('board', 'b', InputOption::VALUE_OPTIONAL, 'special a board', 'Board'),
+                     new InputOption('check', 'c', InputOption::VALUE_OPTIONAL, 'check a task'),
+                     new InputOption('start', 's', InputOption::VALUE_OPTIONAL, 'start a task'),
+                     new InputOption('archive', 'a', InputOption::VALUE_OPTIONAL, 'archive a task'),
+                 ])
+             )
              ->setHelp('Note command');
     }
 

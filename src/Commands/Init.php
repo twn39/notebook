@@ -2,7 +2,6 @@
 namespace App\Commands;
 
 use League\CLImate\CLImate;
-use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
