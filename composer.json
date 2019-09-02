@@ -2,7 +2,7 @@
     "name": "weinan/notebook",
     "type": "project",
     "require": {
-        "symfony/console": "^4.2",
+        "symfony/console": "^4.3",
         "pimple/pimple": "^3.2",
         "league/climate": "^3.5",
         "illuminate/database": "^5.8",
